@@ -5,6 +5,7 @@ import android.webkit.URLUtil;
 
 import com.dhairytripathi.linkpreviewlayout.model.MetaData;
 
+import org.jetbrains.annotations.Nullable;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -31,11 +32,9 @@ public class LinkPreview {
         new getData().execute();
     }
 
-    private class getData extends AsyncTask<Void, Void, Void> {
-
-
+    private class getData extends AsyncTaskCoroutine {
         @Override
-        protected Void doInBackground(Void... params) {
+        public Object doInBackground(Object[] params) {
             Document doc = null;
             try {
                 doc = Jsoup.connect(url)
@@ -151,9 +150,10 @@ public class LinkPreview {
         }
 
         @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
+        public void onPostExecute(@Nullable Object result) {
+            super.onPostExecute(result);
             responseListener.onData(metaData);
+
         }
     }
 
