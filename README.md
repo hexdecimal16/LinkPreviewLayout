@@ -1,4 +1,6 @@
 # LinkPreviewLayout
+[![](https://jitpack.io/v/hexdecimal16/LinkPreviewLayout.svg)](https://jitpack.io/#hexdecimal16/LinkPreviewLayout)
+
 A Link Preview Layout Library for Android (@inspired from https://raw.githubusercontent.com/ponnamkarthik/RichLinkPreview)
 
 > Sample Image
