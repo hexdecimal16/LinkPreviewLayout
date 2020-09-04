@@ -1,5 +1,5 @@
 # LinkPreviewLayout
-[![](https://jitpack.io/v/hexdecimal16/LinkPreviewLayout.svg)](https://jitpack.io/#hexdecimal16/LinkPreviewLayout)
+![API](https://img.shields.io/badge/API-14%2B-blue.svg?style=flat)  [![CircleCI](https://circleci.com/gh/hexdecimal16/EditTextPin/tree/master.svg?style=svg)](https://circleci.com/gh/https://github.com/hexdecimal16/LinkPreviewLayout/tree/master) [![](https://jitpack.io/v/hexdecimal16/LinkPreviewLayout.svg)](https://jitpack.io/#hexdecimal16/LinkPreviewLayout)
 
 A Link Preview Layout Library for Android (@inspired from https://raw.githubusercontent.com/ponnamkarthik/RichLinkPreview)
 
