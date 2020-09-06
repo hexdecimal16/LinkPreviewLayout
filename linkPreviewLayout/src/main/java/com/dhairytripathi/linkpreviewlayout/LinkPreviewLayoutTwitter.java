@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.dhairytripathi.linkpreviewlayout.model.MetaData;
 import com.squareup.picasso.Picasso;
@@ -27,12 +28,14 @@ public class LinkPreviewLayoutTwitter extends RelativeLayout {
     private Context context;
     private MetaData meta;
 
-    private LinearLayout linearLayout;
+    private ConstraintLayout constraintLayout;
     private ImageView imageView;
     private TextView textViewTitle;
     private TextView textViewDesp;
+    private TextView textViewContent;
 
     private String main_url;
+    private String text;
 
     private boolean isDefaultClick = true;
 
@@ -70,13 +73,12 @@ public class LinkPreviewLayoutTwitter extends RelativeLayout {
         }
 
 
-
-
-        linearLayout = findViewById(R.id.rich_link_card);
+        constraintLayout = findViewById(R.id.rich_link_card);
         imageView = findViewById(R.id.rich_link_image);
         textViewTitle = findViewById(R.id.rich_link_title);
         textViewDesp = findViewById(R.id.rich_link_desp);
-
+        textViewContent = findViewById(R.id.tv_content_twitter);
+        textViewContent.setText(text);
 
         if(meta.getImageurl().equals("") || meta.getImageurl().isEmpty()) {
             imageView.setVisibility(GONE);
@@ -105,7 +107,7 @@ public class LinkPreviewLayoutTwitter extends RelativeLayout {
         }
 
 
-        linearLayout.setOnClickListener(new OnClickListener() {
+        constraintLayout.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(isDefaultClick) {
@@ -120,6 +122,9 @@ public class LinkPreviewLayoutTwitter extends RelativeLayout {
             }
         });
 
+    }
+
+    private void initText() {
     }
 
 
@@ -157,6 +162,7 @@ public class LinkPreviewLayoutTwitter extends RelativeLayout {
         Pattern pattern = Patterns.WEB_URL;
         Matcher matcher = pattern.matcher(text);
         matcher.find();
+        this.text = text;
         try {
             main_url = matcher.group(0);
             LinkPreview richPreview = new LinkPreview(new ResponseListener() {
@@ -179,6 +185,7 @@ public class LinkPreviewLayoutTwitter extends RelativeLayout {
             richPreview.getPreview(main_url);
         } catch (Exception e) {
             Log.e("LinkPreviewLayout", e.getMessage());
+            initText();
         }
 
     }

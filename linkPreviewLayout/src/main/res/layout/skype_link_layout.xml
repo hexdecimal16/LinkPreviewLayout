@@ -1,85 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rich_link_card"
     android:background="@drawable/bg_radius"
     android:layout_margin="5dp">
 
-    <ImageView
-        android:scaleType="centerInside"
-        android:id="@+id/rich_link_image"
-        android:layout_width="match_parent"
-        android:layout_height="150dp" />
-
     <RelativeLayout
-        android:background="@drawable/bg_skype"
+        android:id="@+id/relativeLayoutParent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="150dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:layout_alignParentBottom="true"
-            android:orientation="horizontal"
+        <ImageView
+            android:id="@+id/rich_link_image"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="150dp"
+            android:scaleType="centerInside"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/bg_skype">
 
             <LinearLayout
-                android:paddingLeft="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TextView
-                    android:textStyle="bold"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:id="@+id/rich_link_title"
-                    android:textColor="@color/md_white_1000"
-                    android:padding="2dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:text="Data"/>
-
-                <TextView
-                    android:maxLines="2"
-                    android:ellipsize="end"
-                    android:id="@+id/rich_link_desp"
-                    android:textColor="@color/md_white_1000"
-                    android:padding="2dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:text="Data"/>
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
                 <LinearLayout
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:scaleType="centerInside"
-                        android:id="@+id/rich_link_favicon"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp" />
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp">
 
                     <TextView
-                        android:maxLines="1"
-                        android:ellipsize="end"
-                        android:id="@+id/rich_link_url"
-                        android:textColor="@color/md_white_1000"
-                        android:padding="2dp"
+                        android:id="@+id/rich_link_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        tools:text="Data"/>
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:padding="2dp"
+                        android:textColor="@color/md_white_1000"
+                        android:textStyle="bold"
+                        tools:text="Data" />
+
+                    <TextView
+                        android:id="@+id/rich_link_desp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:padding="2dp"
+                        android:textColor="@color/md_white_1000"
+                        tools:text="Data" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/rich_link_favicon"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:scaleType="centerInside" />
+
+                        <TextView
+                            android:id="@+id/rich_link_url"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:padding="2dp"
+                            android:textColor="@color/md_white_1000"
+                            tools:text="Data" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
             </LinearLayout>
 
-        </LinearLayout>
+        </RelativeLayout>
+
 
     </RelativeLayout>
 
-</RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayoutParent">
+
+        <TextView
+            android:id="@+id/tv_content_skype"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="10dp"
+            android:scrollbars="vertical"
+            android:text="Data"
+            android:textColor="@android:color/darker_gray" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

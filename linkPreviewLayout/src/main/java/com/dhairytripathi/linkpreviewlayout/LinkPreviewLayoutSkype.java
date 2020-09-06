@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.dhairytripathi.linkpreviewlayout.model.MetaData;
 import com.squareup.picasso.Picasso;
@@ -21,20 +22,21 @@ import com.squareup.picasso.Picasso;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class LinkPreviewLayoutSkype extends RelativeLayout {
+public class LinkPreviewLayoutSkype extends ConstraintLayout {
 
-    private View view;
     private Context context;
     private MetaData meta;
 
-    private RelativeLayout relativeLayout;
+    private ConstraintLayout constraintLayout;
     private ImageView imageView;
     private ImageView imageViewFavIcon;
     private TextView textViewTitle;
     private TextView textViewDesp;
     private TextView textViewUrl;
+    private TextView textViewContent;
 
     private String main_url;
+    private String text;
 
     private boolean isDefaultClick = true;
 
@@ -65,20 +67,19 @@ public class LinkPreviewLayoutSkype extends RelativeLayout {
     public void initView() {
 
         if(findRelativeLayoutChild() != null) {
-            this.view = findRelativeLayoutChild();
         } else  {
-            this.view = this;
             inflate(context, R.layout.skype_link_layout,this);
         }
 
-        relativeLayout = findViewById(R.id.rich_link_card);
+        constraintLayout = findViewById(R.id.rich_link_card);
         imageView = findViewById(R.id.rich_link_image);
         imageViewFavIcon = findViewById(R.id.rich_link_favicon);
         textViewTitle = findViewById(R.id.rich_link_title);
         textViewDesp = findViewById(R.id.rich_link_desp);
         textViewUrl = findViewById(R.id.rich_link_url);
+        textViewContent = findViewById(R.id.tv_content_skype);
 
-
+        textViewContent.setText(text);
         if(meta.getImageurl().equals("") || meta.getImageurl().isEmpty()) {
             imageView.setVisibility(GONE);
             Log.e("LinkPreViewLayout", "Telegram: imageUrl empty");
@@ -122,7 +123,7 @@ public class LinkPreviewLayoutSkype extends RelativeLayout {
         }
 
 
-        relativeLayout.setOnClickListener(new OnClickListener() {
+        constraintLayout.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(isDefaultClick) {
@@ -137,6 +138,17 @@ public class LinkPreviewLayoutSkype extends RelativeLayout {
             }
         });
 
+    }
+
+    private void initText() {
+        if(findRelativeLayoutChild() != null) {
+        } else  {
+            inflate(context, R.layout.skype_link_layout,this);
+        }
+        RelativeLayout relativeLayout = findViewById(R.id.relativeLayoutParent);
+        relativeLayout.setVisibility(View.GONE);
+        textViewContent = findViewById(R.id.tv_content_skype);
+        textViewContent.setText(text);
     }
 
     private void richLinkClicked() {
@@ -174,13 +186,13 @@ public class LinkPreviewLayoutSkype extends RelativeLayout {
         Pattern pattern = Patterns.WEB_URL;
         Matcher matcher = pattern.matcher(text);
         matcher.find();
+        this.text = text;
         try {
             main_url = matcher.group(0);
             LinkPreview richPreview = new LinkPreview(new ResponseListener() {
                 @Override
                 public void onData(MetaData metaData) {
                     meta = metaData;
-
                     if(meta.getTitle().isEmpty() || meta.getTitle().equals("")) {
                         viewListener.onSuccess(true);
                     }
@@ -196,6 +208,7 @@ public class LinkPreviewLayoutSkype extends RelativeLayout {
             richPreview.getPreview(main_url);
         } catch (Exception e) {
             Log.e("LinkPreviewLayout", e.getMessage());
+            initText();
         }
 
     }
